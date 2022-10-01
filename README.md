@@ -1,0 +1,1 @@
+A stock-scanner for Chinese stock market focus on Sharpe Ratio and profitability.
