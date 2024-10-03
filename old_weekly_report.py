@@ -10,8 +10,8 @@ from pandas import ExcelWriter
 class StockScanner:
     def __init__(self):
         # yf.pdr_override()
-        self.filePath = r"files/report.csv"
-        self.newFile = r"output.xlsx"
+        self.filePath = r"files/weeklyreport.csv"
+        self.newFile = r"weekly_output.xlsx"
         self.today = date.today()
         self.start = date.today() + relativedelta(months=-1)
         self.exportList = pd.DataFrame()
@@ -19,7 +19,7 @@ class StockScanner:
         self.symbols = []
         self.table = pd.read_csv(
             self.filePath,
-            names=["Order", "symbol", "Name", "Yoy", "small cap", "big cap"],
+            names=["Order", "symbol", "Name", "small cap", "big cap"],
             header=None,
             index_col=None,
             engine="python",
@@ -63,7 +63,7 @@ class StockScanner:
         self.solution["ratio"] = (
             self.solution["annual_average"] / self.solution["annual_std"]
         )
-        self.solution["std>0.7"] = self.solution["annual_std"] > 0.7
+        self.solution["std>0.5"] = self.solution["annual_std"] > 0.7
         self.solution["names"] = self.names
         self.solution.sort_values(by=["ratio"], ascending=False, inplace=True)
         self.solution.reset_index(inplace=True)
