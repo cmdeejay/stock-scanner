@@ -37,7 +37,7 @@ class StockScanner:
         today = date.today()
         start = today - relativedelta(months=1)
         self.data = yf.download(tickers=self.new_tickers, start=start, end=today)
-        self.data = self.data["Adj Close"]
+        self.data = self.data["Close"]
         return self.data
 
     def daily_returns(self):
