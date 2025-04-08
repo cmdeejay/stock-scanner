@@ -1,6 +1,6 @@
 import pandas as pd
 import yfinance as yf
-from datetime import date
+from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 from pandas import ExcelWriter
 import numpy as np
@@ -36,7 +36,8 @@ class StockScanner:
     def download(self):
         today = date.today()
         start = today - relativedelta(months=2)
-        self.data = yf.download(tickers=self.new_tickers, start=start, end=today)
+        end = today + timedelta(days=1)
+        self.data = yf.download(tickers=self.new_tickers, start=start, end=end)
         self.data = self.data["Close"]
         return self.data
 
